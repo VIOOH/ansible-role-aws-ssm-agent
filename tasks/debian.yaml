@@ -7,14 +7,14 @@
 
 - name: Change URL destination for 32bit arch
   set_fact:
-    url: '386'
+    architecture_url: '386'
   when: cpu_arch.stdout == '32'
 
 - name: Install deb file for Debian family 32/64-bit
   become: yes
   become_user: root
   apt:
-    deb: "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_{{ url }}/amazon-ssm-agent.deb"
+    deb: "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_{{ architecture_url }}/amazon-ssm-agent.deb"
   when: ansible_os_family == 'Debian'
 
 - name: Register to service
